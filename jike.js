@@ -1,5 +1,6 @@
 $( document ).ready(function() {
   var thermostat = new Thermostat();
+
   $( ".temperature-display" ).text(thermostat.displayTemperature());
 
   $( "#up" ).click(function(){
@@ -11,5 +12,19 @@ $( document ).ready(function() {
     thermostat.down();
     $( ".temperature-display" ).text(thermostat.displayTemperature());
   });
-  
+
+  $ ( "#reset" ).click(function(){
+    thermostat.reset();
+    $( ".temperature-display" ).text(thermostat.displayTemperature());
+  });
+
+  $ ( "#power-saving" ).click(function(){
+    thermostat.enablePowerSaving();
+  });
+
+  $ ( "#power-hungry" ).click(function(){
+    thermostat.disablePowerSaving();
+  });
+
+
 });
