@@ -26,5 +26,16 @@ $( document ).ready(function() {
     thermostat.disablePowerSaving();
   });
 
+  $( ".energy-usage" ).attr("usage", function() {
+    thermostat.currentUsage();
+    })
+
+    if (this.usage = "high-usage") {
+      $ ( ".energy-usage" ).css('background-color', 'red');
+    } else {
+      $ ( ".energy-usage" ).css('background-color', 'green');
+    }
+
+
 
 });
