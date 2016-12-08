@@ -49,7 +49,7 @@ var Thermostat = function() {
   Thermostat.prototype.currentUsage = function(){
     if (this.temperature < this.MEDIUM_ENERGY_USAGE_LIMIT) {
        return 'low-usage';
-    } else if (this.temperature > this.MEDIUM_ENERGY_USAGE_LIMIT && this.temperature < this.MAX_TEMP_POWER_SAVING) {
+    } else if (this.temperature >= this.MEDIUM_ENERGY_USAGE_LIMIT && this.temperature < this.MAX_TEMP_POWER_SAVING) {
       return 'medium-usage';
     } else {
       return 'high-usage';

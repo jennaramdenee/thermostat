@@ -2,6 +2,14 @@
   border: 1px solid blue;
 }
 
-.energy-usage {
-  
+.high-usage {
+  background-color: red;
+}
+
+.medium-usage {
+  background-color: orange;
+}
+
+.low-usage {
+  background-color: green;
 }

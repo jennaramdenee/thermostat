@@ -1,20 +1,30 @@
 $( document ).ready(function() {
   var thermostat = new Thermostat();
 
+  temperatureChange();
+
+  function temperatureChange(){
+    $( "#energy-usage" ).attr("class", thermostat.currentUsage());
+    $( "#energy-usage" ).text(thermostat.currentUsage());
+  }
+
   $( ".temperature-display" ).text(thermostat.displayTemperature());
 
   $( "#up" ).click(function(){
     thermostat.up();
+    temperatureChange();
     $( ".temperature-display" ).text(thermostat.displayTemperature());
   });
 
   $ ( "#down" ).click(function(){
     thermostat.down();
+    temperatureChange();
     $( ".temperature-display" ).text(thermostat.displayTemperature());
   });
 
   $ ( "#reset" ).click(function(){
     thermostat.reset();
+    temperatureChange();
     $( ".temperature-display" ).text(thermostat.displayTemperature());
   });
 
@@ -25,16 +35,5 @@ $( document ).ready(function() {
   $ ( "#power-hungry" ).click(function(){
     thermostat.disablePowerSaving();
   });
-
-  $( ".energy-usage" ).attr("usage", function() {
-    thermostat.currentUsage();
-  })
-
-    if (this.usage = "high-usage") {
-      $ ( ".energy-usage" ).css('background-color', 'red');
-    } else {
-      $ ( ".energy-usage" ).css('background-color', 'green');
-    }
-
 
 });
