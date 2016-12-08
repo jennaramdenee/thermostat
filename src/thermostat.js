@@ -3,6 +3,8 @@ var Thermostat = function() {
   this.temperature = this.DEFAULT_TEMP;
 
   this.MAX_TEMP_POWER_SAVING = 25;
+  this.maxTemperature = this.MAX_TEMP_POWER_SAVING;
+
   this.MAX_TEMP_POWER_HUNGRY = 32;
   this.MIN_TEMP = 10;
   this.MEDIUM_ENERGY_USAGE_LIMIT = 18;
