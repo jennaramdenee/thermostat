@@ -6,21 +6,35 @@
   </head>
 
   <body>
+    <div class="thermostat">
 
-    <div class="temperature-display">
-      Placeholder for temperature display
+      <div class="display">
+        <div class="temperature-display">
+          Placeholder for temperature display
+        </div>
+        <div id="energy-usage">
+          Placeholder for current energy usage
+        </div>
+        <section>
+          Current temperature: <span id="current-temp"></span>
+          <select id="city">
+            <option value="london">London</option>
+            <option value="newyork">New York</option>
+            <option value="chicago">Chicago</option>
+          </select>
+        </section>
+      </div>
+
+      <div class="thermostat-actions">
+        <button type="button" id="up">Up</button>
+        <button type="button" id="down">Down</button>
+        <button type="reset" id="reset">Reset</button>
+
+        <button type="button" id="power-saving">Power Saving On</button>
+        <button type="button" id="power-hungry">Power Saving Off</button>
+      </div>
+
     </div>
-
-    <div id="energy-usage">
-      Placeholder for current energy usage
-    </div>
-
-    <button type="button" id="up">Up</button>
-    <button type="button" id="down">Down</button>
-    <button type="reset" id="reset">Reset</button>
-
-    <button type="button" id="power-saving">Power Saving On</button>
-    <button type="button" id="power-hungry">Power Saving Off</button>
 
     <script src="src/thermostat.js"></script>
     <script src="jquery.js"></script>
