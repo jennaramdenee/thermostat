@@ -2,33 +2,29 @@ $( document ).ready(function() {
   var thermostat = new Thermostat();
 
   getSettings();
-  energyUsageChange();
-
-  $( ".temperature-display" ).text(thermostat.displayTemperature() + "C");
+  updateView();
 
   $( "#up" ).click(function(){
     thermostat.up();
-    energyUsageChange();
     postTemperature(thermostat.displayTemperature());
-    $( ".temperature-display" ).text(thermostat.displayTemperature() + "C");
+    updateView();
   });
 
   $ ( "#down" ).click(function(){
     thermostat.down();
-    energyUsageChange();
     postTemperature(thermostat.displayTemperature());
-    $( ".temperature-display" ).text(thermostat.displayTemperature() + "C");
+    updateView();
   });
 
   $ ( "#reset" ).click(function(){
     thermostat.reset();
-    energyUsageChange();
     postTemperature(thermostat.displayTemperature());
-    $( ".temperature-display" ).text(thermostat.displayTemperature() + "C");
+    updateView();
   });
 
   $ ( "#power-saving" ).click(function(){
     thermostat.enablePowerSaving();
+    updateView();
     $(this).addClass('On');
     $( "#power-hungry" ).removeClass('On');
     postMode("Power Saving");
@@ -65,7 +61,6 @@ $( document ).ready(function() {
 
   function getSettings(){
     $.getJSON('http://localhost:4567/settings', function(data) {
-      $(".temperature-display").text(data.temperature);
       thermostat.temperature = parseFloat(data.temperature);
       loadWeather(data.city);
 
@@ -76,23 +71,24 @@ $( document ).ready(function() {
         }
       })
 
-      $(".power-mode").removeClass('On');
       if (data.mode === "Power Hungry"){
-        $("#power-hungry").addClass('On');
         thermostat.disablePowerSaving();
       } else {
-        $("#power-saving").addClass('On');
         thermostat.enablePowerSaving();
       }
-      energyUsageChange();
+      updateView();
     })
   }
 
   function updateView(){
-    $(this).addClass('On');
-    $( "#power-saving" ).removeClass('On');
-
-
+    $( ".temperature-display" ).text(thermostat.displayTemperature() + "C");
+    energyUsageChange();
+    $(".power-mode").removeClass('On');
+    if (thermostat.mode === "Power Hungry"){
+      $("#power-hungry").addClass('On');
+    } else {
+      $("#power-saving").addClass('On');
+    }
   }
 
   function postCity(city){
