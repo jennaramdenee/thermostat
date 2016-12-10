@@ -30,7 +30,12 @@ class Thermostat < Sinatra::Base
     user.update(city: params[:city])
   end
 
-
+  post '/mode' do
+    headers 'Access-Control-Allow-Origin' => '*'
+    user = User.get(1)
+    user.update(mode: params[:mode])
+  end
+  
 
   # start the server if ruby file executed directly
   run! if app_file == $0

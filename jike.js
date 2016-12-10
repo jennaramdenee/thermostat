@@ -16,21 +16,29 @@ $( document ).ready(function() {
   $ ( "#down" ).click(function(){
     thermostat.down();
     energyUsageChange();
+    postTemperature(thermostat.displayTemperature());
     $( ".temperature-display" ).text(thermostat.displayTemperature() + "C");
   });
 
   $ ( "#reset" ).click(function(){
     thermostat.reset();
     energyUsageChange();
+    postTemperature(thermostat.displayTemperature());
     $( ".temperature-display" ).text(thermostat.displayTemperature() + "C");
   });
 
   $ ( "#power-saving" ).click(function(){
     thermostat.enablePowerSaving();
+    $(this).addClass('On');
+    $( "#power-hungry" ).removeClass('On');
+    postMode("Power Saving");
   });
 
   $ ( "#power-hungry" ).click(function(){
     thermostat.disablePowerSaving();
+    $(this).addClass('On');
+    $( "#power-saving" ).removeClass('On');
+    postMode("Power Hungry");
   });
 
   $ ( "#city" ).change(function(event){
@@ -58,9 +66,33 @@ $( document ).ready(function() {
   function getSettings(){
     $.getJSON('http://localhost:4567/settings', function(data) {
       $(".temperature-display").text(data.temperature);
+      thermostat.temperature = parseFloat(data.temperature);
       loadWeather(data.city);
-      console.log(data);
+
+      $("#city").children().each(function(){
+        var value = $(this).attr('value');
+        if (value === data.city){
+          $(this).attr("selected", "true");
+        }
+      })
+
+      $(".power-mode").removeClass('On');
+      if (data.mode === "Power Hungry"){
+        $("#power-hungry").addClass('On');
+        thermostat.disablePowerSaving();
+      } else {
+        $("#power-saving").addClass('On');
+        thermostat.enablePowerSaving();
+      }
+      energyUsageChange();
     })
+  }
+
+  function updateView(){
+    $(this).addClass('On');
+    $( "#power-saving" ).removeClass('On');
+
+
   }
 
   function postCity(city){
@@ -69,6 +101,10 @@ $( document ).ready(function() {
 
   function postTemperature(temperature){
     $.post('http://localhost:4567/temperature', { "temperature":temperature.toString() })
+  }
+
+  function postMode(mode){
+    $.post('http://localhost:4567/mode', { "mode":mode })
   }
 
 });

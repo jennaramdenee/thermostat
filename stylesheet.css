@@ -86,3 +86,7 @@ section {
 #city {
   margin: 10px;
 }
+
+.On {
+  border: 2px solid black;
+}
