@@ -2,25 +2,26 @@ $( document ).ready(function() {
   var thermostat = new Thermostat();
 
   getSettings();
-  temperatureChange();
+  energyUsageChange();
 
   $( ".temperature-display" ).text(thermostat.displayTemperature() + "C");
 
   $( "#up" ).click(function(){
     thermostat.up();
-    temperatureChange();
+    energyUsageChange();
+    postTemperature(thermostat.displayTemperature());
     $( ".temperature-display" ).text(thermostat.displayTemperature() + "C");
   });
 
   $ ( "#down" ).click(function(){
     thermostat.down();
-    temperatureChange();
+    energyUsageChange();
     $( ".temperature-display" ).text(thermostat.displayTemperature() + "C");
   });
 
   $ ( "#reset" ).click(function(){
     thermostat.reset();
-    temperatureChange();
+    energyUsageChange();
     $( ".temperature-display" ).text(thermostat.displayTemperature() + "C");
   });
 
@@ -35,10 +36,11 @@ $( document ).ready(function() {
   $ ( "#city" ).change(function(event){
     event.preventDefault();
     var city = $("#city").val();
+    postCity(city);
     loadWeather(city);
   })
 
-  function temperatureChange(){
+  function energyUsageChange(){
     $( "#energy-usage" ).attr("class", thermostat.currentUsage());
     $( "#energy-usage" ).text(thermostat.currentUsage());
   }
@@ -49,14 +51,24 @@ $( document ).ready(function() {
     var units = '&units=metric';
     $.get(url + token + units, function(data) {
       $("#current-temp").text(data.main.temp);
+      $("#city-name").text(data.name);
     })
   }
 
   function getSettings(){
-    $.getJSON('http://localhost:4567/temperature', function(data) {
-      $("#temperature-display").text(data.temperature);
-      $("#current-temp").text(data.city);
+    $.getJSON('http://localhost:4567/settings', function(data) {
+      $(".temperature-display").text(data.temperature);
+      loadWeather(data.city);
+      console.log(data);
     })
+  }
+
+  function postCity(city){
+    $.post('http://localhost:4567/city', { "city":city })
+  }
+
+  function postTemperature(temperature){
+    $.post('http://localhost:4567/temperature', { "temperature":temperature.toString() })
   }
 
 });
