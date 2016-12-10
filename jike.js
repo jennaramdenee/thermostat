@@ -1,13 +1,8 @@
 $( document ).ready(function() {
   var thermostat = new Thermostat();
 
+  getSettings();
   temperatureChange();
-  loadWeather("london");
-
-  function temperatureChange(){
-    $( "#energy-usage" ).attr("class", thermostat.currentUsage());
-    $( "#energy-usage" ).text(thermostat.currentUsage());
-  }
 
   $( ".temperature-display" ).text(thermostat.displayTemperature() + "C");
 
@@ -43,12 +38,24 @@ $( document ).ready(function() {
     loadWeather(city);
   })
 
+  function temperatureChange(){
+    $( "#energy-usage" ).attr("class", thermostat.currentUsage());
+    $( "#energy-usage" ).text(thermostat.currentUsage());
+  }
+
   function loadWeather(city){
     var token = '&appid=3352b2eab6d1a3fe0a4196871876b36a';
     var url = 'http://api.openweathermap.org/data/2.5/weather?q=' + city;
     var units = '&units=metric';
     $.get(url + token + units, function(data) {
       $("#current-temp").text(data.main.temp);
+    })
+  }
+
+  function getSettings(){
+    $.getJSON('http://localhost:4567/temperature', function(data) {
+      $("#temperature-display").text(data.temperature);
+      $("#current-temp").text(data.city);
     })
   }
 
