@@ -73,23 +73,23 @@ I would like my settings to be remembered the next time I turn on my thermostat
 4. Create two new local PostgreSQL databases, `thermostat_development` and `thermostat_test`
 
 ### How to Use
-1. Load program by running `index.html` in your browser of choice
+* Load program by running `index.html` in your browser of choice
 
 <img src="Screenshots/Initial_load.png" width=30% height=40%/>
 
-2. Use up and down buttons to increase and decrease the temperature (interface responds by amending temperature shown, energy usage)
+* Use up and down buttons to increase and decrease the temperature (interface responds by amending temperature shown, energy usage)
 
 <img src="Screenshots/Increase_temp.png" width=30% height=40%/>
 
-3. Change city using drop down menu
+* Change city using drop down menu
 
 <img src="Screenshots/Change_city_weather.png" width=30% height=40%/>
 
-4. Enable/disable power saving mode
+* Enable/disable power saving mode
 
 <img src="Screenshots/Disable_power_saving.png" width=30% height=40%/>
 
-5. Reload page to ensure settings are maintained
+*  Reload page to ensure settings are maintained
 
 ### Technology Used
 * JavaScript / jQuery (for business logic and event handling)
