@@ -59,7 +59,7 @@ I would like to view an energy usage of 'high-usage' if the temperature is above
 
 As a user,
 So that I can understand the temperature in my location,
-I would like to select a location at which tos view the temperature 
+I would like to select a location at which tos view the temperature
 
 As a user,
 So that I do not have to configure settings to match my previous room environment,
@@ -75,19 +75,19 @@ I would like my settings to be remembered the next time I turn on my thermostat
 ### How to Use
 1. Load program by running `index.html` in your browser of choice
 
-<img src="screenshots/Initial_load.png" width=30% height=40%/>
+<img src="Screenshots/Initial_load.png" width=30% height=40%/>
 
 2. Use up and down buttons to increase and decrease the temperature (interface responds by amending temperature shown, energy usage)
 
-<img src="screenshots/Increase_temp.png" width=30% height=40%/>
+<img src="Screenshots/Increase_temp.png" width=30% height=40%/>
 
 3. Change city using drop down menu
 
-<img src="screenshots/Change_city_weather.png" width=30% height=40%/>
+<img src="Screenshots/Change_city_weather.png" width=30% height=40%/>
 
 4. Enable/disable power saving mode
 
-<img src="screenshots/Disable_power_saving.png" width=30% height=40%/>
+<img src="Screenshots/Disable_power_saving.png" width=30% height=40%/>
 
 5. Reload page to ensure settings are maintained
 
