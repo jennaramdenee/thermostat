@@ -8,6 +8,7 @@ class Thermostat < Sinatra::Base
 
   get '/' do
     'Hello Thermostat!'
+    User.create(city: "london", temperature: 20, mode:"Power Hungry")
   end
 
   get '/settings' do
@@ -35,7 +36,7 @@ class Thermostat < Sinatra::Base
     user = User.get(1)
     user.update(mode: params[:mode])
   end
-  
+
 
   # start the server if ruby file executed directly
   run! if app_file == $0
