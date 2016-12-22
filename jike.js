@@ -1,43 +1,45 @@
-$( document ).ready(function() {
+$( document).ready(function() {
+
   var thermostat = new Thermostat();
+  console.log(thermostat.displayTemperature());
 
   getSettings();
   updateView();
 
-  $( "#up" ).click(function(){
+  $("#up").click(function(){
     thermostat.up();
     postTemperature(thermostat.displayTemperature());
     updateView();
   });
 
-  $ ( "#down" ).click(function(){
+  $("#down").click(function(){
     thermostat.down();
     postTemperature(thermostat.displayTemperature());
     updateView();
   });
 
-  $ ( "#reset" ).click(function(){
+  $("#reset").click(function(){
     thermostat.reset();
     postTemperature(thermostat.displayTemperature());
     updateView();
   });
 
-  $ ( "#power-saving" ).click(function(){
+  $("#power-saving").click(function(){
     thermostat.enablePowerSaving();
     updateView();
     $(this).addClass('On');
-    $( "#power-hungry" ).removeClass('On');
+    $("#power-hungry").removeClass('On');
     postMode("Power Saving");
   });
 
-  $ ( "#power-hungry" ).click(function(){
+  $("#power-hungry").click(function(){
     thermostat.disablePowerSaving();
     $(this).addClass('On');
-    $( "#power-saving" ).removeClass('On');
+    $("#power-saving").removeClass('On');
     postMode("Power Hungry");
   });
 
-  $ ( "#city" ).change(function(event){
+  $("#city").change(function(event){
     event.preventDefault();
     var city = $("#city").val();
     postCity(city);
@@ -45,8 +47,8 @@ $( document ).ready(function() {
   })
 
   function energyUsageChange(){
-    $( "#energy-usage" ).attr("class", thermostat.currentUsage());
-    $( "#energy-usage" ).text(thermostat.currentUsage());
+    $("#energy-usage").attr("class", thermostat.currentUsage());
+    $("#energy-usage").text(thermostat.currentUsage());
   }
 
   function loadWeather(city){
@@ -81,7 +83,7 @@ $( document ).ready(function() {
   }
 
   function updateView(){
-    $( ".temperature-display" ).text(thermostat.displayTemperature() + "C");
+    $(".temperature-display").text(thermostat.displayTemperature() + "C");
     energyUsageChange();
     $(".power-mode").removeClass('On');
     if (thermostat.mode === "Power Hungry"){
